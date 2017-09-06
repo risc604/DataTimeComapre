@@ -41,6 +41,9 @@ public class Utils
 
         System.out.println("checkDifferentMinute(), intStartDT: " + Arrays.toString(intStartDT) +
                     ", intLastEndDT: " + Arrays.toString(intLastEndDT));
+        final String pattern = "";	
+        SimpleDateFormat sdf = new SimpleDateFormat();
+        
         Date[] dtArray = new Date[2];
         dtArray[0] = new Date(  intStartDT[0]+(2000-1900), intStartDT[1]-1, intStartDT[2],
                                 intStartDT[3], intStartDT[4]);
