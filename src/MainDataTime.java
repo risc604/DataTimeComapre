@@ -1,5 +1,6 @@
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
 
 public class MainDataTime 
@@ -31,15 +32,25 @@ public class MainDataTime
 		System.out.println("currentDT - recordDT = " + 
 							new Date(currentDT.getTime() - recordDT.getTime()) );
 	}
+	
+	public static void testHexStringToByteArray()
+	{
+		String hexString = "11081F111A";
+		byte[] byteArrayHex = Utils.toByteArray(hexString);
+		
+		System.out.println("byte Array: " + Arrays.toString(byteArrayHex));
+	}
 		
 	public static void main(String[] args)
 	{
-		try {
-			DataTimeTest();
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		//try {
+		//	DataTimeTest();
+		//} catch (ParseException e) {
+		//	// TODO Auto-generated catch block
+		//	e.printStackTrace();
+		//}
+		
+		testHexStringToByteArray();
 	}
 
 }
