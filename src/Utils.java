@@ -1,3 +1,5 @@
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
 
@@ -34,30 +36,64 @@ public class Utils
         return  dtNumber;
     }
 	
-	public long checkDifferentMinute(String startDT, String lastEndDT)
+	
+	public static Date covertToDateObj(String srcTime)
     {
-        int[] intStartDT = covertDTFormat(startDT);
-        int[] intLastEndDT = covertDTFormat(lastEndDT);
-
-        System.out.println("checkDifferentMinute(), intStartDT: " + Arrays.toString(intStartDT) +
-                    ", intLastEndDT: " + Arrays.toString(intLastEndDT));
-        final String pattern = "";	
-        SimpleDateFormat sdf = new SimpleDateFormat();
+        //byte[] startByte = hexStringToByteArray(srcTime);
+		byte[] startByte = toByteArray(srcTime);
+		int[] dtNumber = new int[startByte.length];
+        for (int i=0; i<startByte.length; i++)
+        {
+            dtNumber[i] = byteToUnsignedInt(startByte[i]);
+        }
+        System.out.println("Date Time Number: " + Arrays.toString(dtNumber));
         
-        Date[] dtArray = new Date[2];
-        dtArray[0] = new Date(  intStartDT[0]+(2000-1900), intStartDT[1]-1, intStartDT[2],
-                                intStartDT[3], intStartDT[4]);
-        dtArray[1] = new Date(  intLastEndDT[0]+(2000-1900), intLastEndDT[1]-1, intLastEndDT[2],
-                                intLastEndDT[3], intLastEndDT[4]);
+        final String pattern = "[yy, MM, dd, HH, mm]";	
+        SimpleDateFormat sdf = new SimpleDateFormat(pattern);
+        Date tmpDate = null;
+		try {
+			tmpDate = sdf.parse(Arrays.toString(dtNumber));
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        return  tmpDate;
+    }
+	
+	
+	public static long checkDifferentMinute(String startDT, String lastEndDT)
+    {
+        //int[] intStartDT = covertDTFormat(startDT);
+        //int[] intLastEndDT = covertDTFormat(lastEndDT);
+        //
+        //System.out.println("checkDifferentMinute(), intStartDT: " + Arrays.toString(intStartDT) +
+        //            ", intLastEndDT: " + Arrays.toString(intLastEndDT));
+        //final String pattern = "[yy, MM, dd, HH, mm]";	
+        //SimpleDateFormat sdf = new SimpleDateFormat(pattern);
+        //
+        //Date[] dtArray = new Date[2];
+        //try {
+		//	dtArray[0] = sdf.parse(Arrays.toString(intStartDT));
+		//	dtArray[1] = sdf.parse(Arrays.toString(intLastEndDT));
+		//} catch (ParseException e) {
+		//	// TODO Auto-generated catch block
+		//	e.printStackTrace();
+		//}
+        
+        //dtArray[0] = new Date(  intStartDT[0]+(2000-1900), intStartDT[1]-1, intStartDT[2],
+        //                        intStartDT[3], intStartDT[4]);
+        //dtArray[1] = new Date(  intLastEndDT[0]+(2000-1900), intLastEndDT[1]-1, intLastEndDT[2],
+        //                        intLastEndDT[3], intLastEndDT[4]);
+       
+		Date[] dtArray = new Date[2];
+		dtArray[0] = covertToDateObj(startDT);
+		dtArray[1] = covertToDateObj(lastEndDT);
+		long diffMinute = Math.abs((dtArray[0].getTime() - dtArray[1].getTime()) / (1000 * 60));
+        System.out.println("dtArray[0]: " + dtArray[0].toString() + ", dtArray[1]: " + dtArray[1].toString() +
+                			", diffMinute: " + diffMinute);
 
-        long diffMinute = Math.abs((dtArray[0].getTime() - dtArray[1].getTime()) / (1000 * 60));
-        System.out.println("intStartDT[]: " + Arrays.toString(intStartDT) +
-                ", intLastEndDT[]: " + Arrays.toString(intLastEndDT) +
-                "\n, dtArray[0]: " + dtArray[0].toString() +
-                ", dtArray[1]: " + dtArray[1].toString() +
-                ", diffMinute: " + diffMinute);
-
-            return diffMinute;
+      
+        return diffMinute;
     }
 
 }

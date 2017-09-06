@@ -36,9 +36,13 @@ public class MainDataTime
 	public static void testHexStringToByteArray()
 	{
 		String hexString = "11081F111A";
+		String lastEndDT = "11081F112A";
 		byte[] byteArrayHex = Utils.toByteArray(hexString);
 		
 		System.out.println("byte Array: " + Arrays.toString(byteArrayHex));
+
+		long tmpLong = Utils.checkDifferentMinute(hexString, lastEndDT);
+		System.out.println("tmpLong: " + tmpLong);
 	}
 		
 	public static void main(String[] args)
