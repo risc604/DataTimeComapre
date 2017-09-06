@@ -63,28 +63,6 @@ public class Utils
 	
 	public static long checkDifferentMinute(String startDT, String lastEndDT)
     {
-        //int[] intStartDT = covertDTFormat(startDT);
-        //int[] intLastEndDT = covertDTFormat(lastEndDT);
-        //
-        //System.out.println("checkDifferentMinute(), intStartDT: " + Arrays.toString(intStartDT) +
-        //            ", intLastEndDT: " + Arrays.toString(intLastEndDT));
-        //final String pattern = "[yy, MM, dd, HH, mm]";	
-        //SimpleDateFormat sdf = new SimpleDateFormat(pattern);
-        //
-        //Date[] dtArray = new Date[2];
-        //try {
-		//	dtArray[0] = sdf.parse(Arrays.toString(intStartDT));
-		//	dtArray[1] = sdf.parse(Arrays.toString(intLastEndDT));
-		//} catch (ParseException e) {
-		//	// TODO Auto-generated catch block
-		//	e.printStackTrace();
-		//}
-        
-        //dtArray[0] = new Date(  intStartDT[0]+(2000-1900), intStartDT[1]-1, intStartDT[2],
-        //                        intStartDT[3], intStartDT[4]);
-        //dtArray[1] = new Date(  intLastEndDT[0]+(2000-1900), intLastEndDT[1]-1, intLastEndDT[2],
-        //                        intLastEndDT[3], intLastEndDT[4]);
-       
 		Date[] dtArray = new Date[2];
 		dtArray[0] = covertToDateObj(startDT);
 		dtArray[1] = covertToDateObj(lastEndDT);
